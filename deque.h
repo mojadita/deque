@@ -31,6 +31,10 @@
 #include "./lists.h"
 #include <pthread.h>
 
+#ifdef __cplusplus
+extern "C" {
+#endif /* __cplusplus */
+
 /* constants */
 #define DQ_FLAG_DEBUG   (1 << 0)
 
@@ -50,8 +54,12 @@ typedef struct deque_s {
 extern void dq_init(DEQUE_P queue, int flags, size_t maxSize);
 extern void dq_add(DEQUE_P queue, void *msg);
 extern void dq_ins(DEQUE_P queue, void *msg);
-void *dq_timedget(DEQUE_P queue, struct timespec *whenAbsTO);
-void *dq_get(DEQUE_P queue);
+extern void *dq_timedget(DEQUE_P queue, struct timespec *whenAbsTO);
+extern void *dq_get(DEQUE_P queue);
+
+#ifdef __cplusplus
+} /* extern "C" */
+#endif /* __cplusplus */
 
 #endif /* DEQUE_H */
 /* Do not include anything AFTER the line above, as it would not be

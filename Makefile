@@ -12,10 +12,15 @@ CFLAGS += -pthread
 all: $(targets)
 clean:
 	$(RM) $(TOCLEAN)
+.depend:
+	$(CC) -MM $(sources) >$@
 
 test_deque_objs = test_deque.o deque.o
 test_deque_ldflags = -pthread
 TOCLEAN += $(test_deque_objs)
+sources += $(test_deque_objs:.o=.c)
 
 test_deque: $(test_deque_objs)
 	$(CC) $(LDFLAGS) -o $@ $($@_objs) $($@_libs) $($@_ldflags)
+
+-include .depend
